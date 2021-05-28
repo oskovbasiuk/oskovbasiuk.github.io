@@ -382,7 +382,7 @@ class GameLevelComponent {
         else {
             this.currentMenuId = menuId;
         }
-        if (this.currentMenuId == -1) {
+        if (this.currentMenuId == -1 && menuId != -1) {
             Object(_scripts_draw__WEBPACK_IMPORTED_MODULE_3__["startGameInterval"])();
         }
         else {
@@ -773,22 +773,21 @@ let ctx;
 let ctxPlay;
 let currentLevel;
 let currentPlayer;
-const defaultMoveVelocity = 0.25;
-const defaultRotateVelocity = 1.4;
+const defaultMoveVelocity = 10;
+const defaultRotateVelocity = 1;
 const textureDim = 64;
-const defaultLevelSize = 50;
+const defaultLevelSize = 40;
 const rayCount = 128;
-const FPS = 60;
 const FOV = 76;
 const halfFOV = FOV / 2;
 const mainColor = '#000';
 const secondaryColor = '#666';
 const thirdColor = '#5d7';
 const playerColor = '#1d7';
-const canvasWidth = 1280;
-const canvasHeight = 720;
+const canvasWidth = 1178;
+const canvasHeight = 512;
 const playerEyesVerticalPosition = [-10, 15];
-const playerEyesVerticalChange = [-2.3, 1.5];
+const playerEyesVerticalChange = [-0.5, 0.28];
 let isLevelFinished = false;
 let textures = new Image();
 textures.src = './assets/images/walls.png';
@@ -994,7 +993,7 @@ class Player {
         this.rotateState = 0;
         this.eyesLevel = 0;
         this.doesEyesLevelChangingUp = true;
-        this.moveVelocity = (1 / this.currentLevel.tilesCount) * 50 * defaultMoveVelocity;
+        this.moveVelocity = (this.currentLevel.tileSize / canvasHeight) * defaultMoveVelocity;
         this.rotateVelocity = (defaultRotateVelocity * Math.PI) / 180;
         this.rayCount = rayCount;
         let angleIncrementForRays = convertToRadians(FOV / this.rayCount);
@@ -1067,10 +1066,10 @@ class Player {
                 this.doesEyesLevelChangingUp = !this.doesEyesLevelChangingUp;
             }
             if (this.doesEyesLevelChangingUp) {
-                this.eyesLevel += playerEyesVerticalChange[0] * defaultMoveVelocity;
+                this.eyesLevel += playerEyesVerticalChange[0];
             }
             else {
-                this.eyesLevel += playerEyesVerticalChange[1] * defaultMoveVelocity;
+                this.eyesLevel += playerEyesVerticalChange[1];
             }
         }
         !this.isCollision(newX, newY) && ((this.x = newX), (this.y = newY));

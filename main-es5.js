@@ -751,7 +751,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.currentMenuId = menuId;
           }
 
-          if (this.currentMenuId == -1) {
+          if (this.currentMenuId == -1 && menuId != -1) {
             Object(_scripts_draw__WEBPACK_IMPORTED_MODULE_3__["startGameInterval"])();
           } else {
             Object(_scripts_draw__WEBPACK_IMPORTED_MODULE_3__["clearGameInterval"])();
@@ -1646,22 +1646,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var ctxPlay;
     var currentLevel;
     var currentPlayer;
-    var defaultMoveVelocity = 0.25;
-    var defaultRotateVelocity = 1.4;
+    var defaultMoveVelocity = 10;
+    var defaultRotateVelocity = 1;
     var textureDim = 64;
-    var defaultLevelSize = 50;
+    var defaultLevelSize = 40;
     var rayCount = 128;
-    var FPS = 60;
     var FOV = 76;
     var halfFOV = FOV / 2;
     var mainColor = '#000';
     var secondaryColor = '#666';
     var thirdColor = '#5d7';
     var playerColor = '#1d7';
-    var canvasWidth = 1280;
-    var canvasHeight = 720;
+    var canvasWidth = 1178;
+    var canvasHeight = 512;
     var playerEyesVerticalPosition = [-10, 15];
-    var playerEyesVerticalChange = [-2.3, 1.5];
+    var playerEyesVerticalChange = [-0.5, 0.28];
     var isLevelFinished = false;
     var textures = new Image();
     textures.src = './assets/images/walls.png';
@@ -1894,7 +1893,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.rotateState = 0;
         this.eyesLevel = 0;
         this.doesEyesLevelChangingUp = true;
-        this.moveVelocity = 1 / this.currentLevel.tilesCount * 50 * defaultMoveVelocity;
+        this.moveVelocity = this.currentLevel.tileSize / canvasHeight * defaultMoveVelocity;
         this.rotateVelocity = defaultRotateVelocity * Math.PI / 180;
         this.rayCount = rayCount;
         var angleIncrementForRays = convertToRadians(FOV / this.rayCount);
@@ -2005,9 +2004,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
 
             if (this.doesEyesLevelChangingUp) {
-              this.eyesLevel += playerEyesVerticalChange[0] * defaultMoveVelocity;
+              this.eyesLevel += playerEyesVerticalChange[0];
             } else {
-              this.eyesLevel += playerEyesVerticalChange[1] * defaultMoveVelocity;
+              this.eyesLevel += playerEyesVerticalChange[1];
             }
           }
 
