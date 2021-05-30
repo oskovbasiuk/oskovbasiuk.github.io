@@ -1757,7 +1757,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var textureDim = 64;
     var defaultLevelSize = 40;
     var rayCount = 221;
-    var FOV = 76;
+    var FOV = 70;
     var halfFOV = FOV / 2;
     var mainColor = '#000';
     var secondaryColor = '#666';
@@ -1943,7 +1943,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "renderWall",
         value: function renderWall(ctx, eyesLevel) {
-          var defaultWallHeight = this.level.tileSize;
+          var defaultWallHeight = 100;
           var defaultDistance = -(canvasHeight / 3) / Math.tan(halfFOV); //negative to become positive
 
           this.distanceToWall = this.distanceToWall * Math.cos(this.angle - this.playerAngle); //fisheye fix

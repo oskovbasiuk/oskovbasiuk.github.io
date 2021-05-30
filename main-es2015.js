@@ -821,7 +821,7 @@ const defaultRotateVelocity = 3.2;
 const textureDim = 64;
 const defaultLevelSize = 40;
 const rayCount = 221;
-const FOV = 76;
+const FOV = 70;
 const halfFOV = FOV / 2;
 const mainColor = '#000';
 const secondaryColor = '#666';
@@ -990,7 +990,7 @@ class Ray {
         // this.textureId = horizontalDist < verticalDist ? 0 : 1;
     }
     renderWall(ctx, eyesLevel) {
-        const defaultWallHeight = this.level.tileSize;
+        const defaultWallHeight = 100;
         const defaultDistance = -(canvasHeight / 3) / Math.tan(halfFOV); //negative to become positive
         this.distanceToWall = this.distanceToWall * Math.cos(this.angle - this.playerAngle); //fisheye fix
         let wallHeight = (defaultWallHeight / this.distanceToWall) * defaultDistance;
