@@ -990,7 +990,7 @@ class Ray {
         // this.textureId = horizontalDist < verticalDist ? 0 : 1;
     }
     renderWall(ctx, eyesLevel) {
-        const defaultWallHeight = 100;
+        const defaultWallHeight = this.level.tileSize;
         const defaultDistance = -(canvasHeight / 3) / Math.tan(halfFOV); //negative to become positive
         this.distanceToWall = this.distanceToWall * Math.cos(this.angle - this.playerAngle); //fisheye fix
         let wallHeight = (defaultWallHeight / this.distanceToWall) * defaultDistance;
