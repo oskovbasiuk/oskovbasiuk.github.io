@@ -2196,7 +2196,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "renderWall",
         value: function renderWall(ctx, eyesLevel) {
-          var defaultWallHeight = this.level.tileSize * 1.2;
+          var defaultWallHeight = this.level.tileSize * 1.7;
           var defaultDistance = -(canvasHeight / 3) / Math.tan(halfFOV); //negative to become positive
 
           this.distanceToWall = this.distanceToWall * Math.cos(this.angle - this.playerAngle); //fisheye fix
