@@ -1072,7 +1072,8 @@ class Ray {
             nextYHorizontal <= canvasHeight) {
             let xCollision = (nextXHorizontal / this.level.tileSize) ^ 0; //j for level array
             let yCollision = (nextYHorizontal / this.level.tileSize) ^ 0; //i for level array
-            if (this.level.isCollision(xCollision, yCollision)) {
+            if (this.level.isCollision(xCollision, yCollision) ||
+                yCollision > this.level.tilesCount - 1) {
                 isCollidingHorizontal = true;
                 this.wallHitXHorizontal = nextXHorizontal;
                 this.wallHitYHorizontal = nextYHorizontal;
@@ -1099,7 +1100,8 @@ class Ray {
             nextYVertical <= canvasHeight) {
             let xCollision = (nextXVertical / this.level.tileSize) ^ 0;
             let yCollision = (nextYVertical / this.level.tileSize) ^ 0;
-            if (this.level.isCollision(xCollision, yCollision)) {
+            if (this.level.isCollision(xCollision, yCollision) ||
+                xCollision > this.level.tilesCount - 1) {
                 isCollidingVertical = true;
                 this.wallHitXVertical = nextXVertical;
                 this.wallHitYVertical = nextYVertical;
@@ -1332,7 +1334,7 @@ class Level {
     getTile(x, y) {
         const i = (y / this.tileSize) ^ 0, j = (x / this.tileSize) ^ 0;
         if (i > this.tilesCount - 1 || j > this.tilesCount - 1)
-            return 0;
+            return 5;
         return this.levelArray[i][j];
     }
     generateLevel(size) {

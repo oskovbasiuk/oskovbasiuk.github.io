@@ -2168,7 +2168,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             var yCollision = nextYHorizontal / this.level.tileSize ^ 0; //i for level array
 
-            if (this.level.isCollision(xCollision, yCollision)) {
+            if (this.level.isCollision(xCollision, yCollision) || yCollision > this.level.tilesCount - 1) {
               isCollidingHorizontal = true;
               this.wallHitXHorizontal = nextXHorizontal;
               this.wallHitYHorizontal = nextYHorizontal;
@@ -2194,7 +2194,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             var _yCollision = nextYVertical / this.level.tileSize ^ 0;
 
-            if (this.level.isCollision(_xCollision, _yCollision)) {
+            if (this.level.isCollision(_xCollision, _yCollision) || _xCollision > this.level.tilesCount - 1) {
               isCollidingVertical = true;
               this.wallHitXVertical = nextXVertical;
               this.wallHitYVertical = nextYVertical;
@@ -2509,7 +2509,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function getTile(x, y) {
           var i = y / this.tileSize ^ 0,
               j = x / this.tileSize ^ 0;
-          if (i > this.tilesCount - 1 || j > this.tilesCount - 1) return 0;
+          if (i > this.tilesCount - 1 || j > this.tilesCount - 1) return 5;
           return this.levelArray[i][j];
         }
       }, {
