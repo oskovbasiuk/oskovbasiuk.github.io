@@ -3617,6 +3617,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.isOnLoginPage.next(this.router.url.includes('login'));
           var passwordRepeatField = this.loginForm.get('passwordRepeat');
+          var passwordField = this.loginForm.get('password');
           this.activatedRoute.url.subscribe(function () {
             _this10.isOnLoginPage.next(_this10.router.url.includes('login'));
 
@@ -3624,8 +3625,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             !_this10.isOnLoginPage.value && validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required);
             passwordRepeatField.setValidators(validators);
           });
-          passwordRepeatField.valueChanges.subscribe(function (value) {
-            if (value !== _this10.loginForm.get('password').value) {
+          Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"])(passwordField.valueChanges, passwordRepeatField.valueChanges).subscribe(function (value) {
+            if (passwordField.value !== passwordRepeatField.value) {
               passwordRepeatField.setErrors({
                 match: "passwords doesn't match"
               });

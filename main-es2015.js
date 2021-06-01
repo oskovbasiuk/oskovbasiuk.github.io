@@ -1978,14 +1978,15 @@ class LoginPageComponent {
     ngOnInit() {
         this.isOnLoginPage.next(this.router.url.includes('login'));
         const passwordRepeatField = this.loginForm.get('passwordRepeat');
+        const passwordField = this.loginForm.get('password');
         this.activatedRoute.url.subscribe(() => {
             this.isOnLoginPage.next(this.router.url.includes('login'));
             const validators = [];
             !this.isOnLoginPage.value && validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required);
             passwordRepeatField.setValidators(validators);
         });
-        passwordRepeatField.valueChanges.subscribe((value) => {
-            if (value !== this.loginForm.get('password').value) {
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"])(passwordField.valueChanges, passwordRepeatField.valueChanges).subscribe((value) => {
+            if (passwordField.value !== passwordRepeatField.value) {
                 passwordRepeatField.setErrors({
                     match: "passwords doesn't match",
                 });
